@@ -1,0 +1,6 @@
+<script setup>
+defineProps({ product: { type: Object, required: true } })
+const emit = defineEmits(['preview', 'add'])
+const imageUrl = (image, width = 700) => `https://images.unsplash.com/${image}?auto=format&fit=crop&w=${width}&q=85`
+</script>
+<template><article class="product-card"><div class="product-image-wrap"><button class="product-image-button" :aria-label="`预览${product.name}`" @click="emit('preview', imageUrl(product.image, 1200))"><img :src="imageUrl(product.image)" :alt="product.name" loading="lazy"/><span class="zoom-hint">点击查看大图</span></button><span class="product-badge">{{ product.badge }}</span><button class="quick-add" :aria-label="`将${product.name}加入购物车`" @click="emit('add', product)">＋</button></div><div class="product-info"><span class="product-category">{{ product.category }}</span><div class="product-title-row"><h3>{{ product.name }}</h3><span class="product-rating">★ {{ product.rating }}</span></div><div class="product-meta"><span>颜色：{{ product.color }} <i>·</i> {{ product.reviews }} 条评价</span><div><b>¥{{ product.price }}</b><del>¥{{ product.oldPrice }}</del></div></div><button class="add-button" @click="emit('add', product)">加入购物袋 <span>＋</span></button></div></article></template>
