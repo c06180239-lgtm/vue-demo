@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>雨夜便利店 · 微缩街角模型</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 50% 45%, #161a30 0%, #0a0c18 55%, #05060d 100%);
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  }
+  body:active { cursor: grabbing; }
+  #canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  /* 悬停信息提示 */
+  #tooltip {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+    background: rgba(10, 12, 24, 0.78);
+    color: #f0f0f5;
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 6px;
+    z-index: 20;
+    transform: translate(14px, 14px);
+    backdrop-filter: blur(6px);
+    letter-spacing: 1px;
+    border: 1px solid rgba(255,255,255,0.08);
+    white-space: nowrap;
+  }
+</style>
+  <script type="module" crossorigin src="./assets/index-CM90C0Ug.js"></script>
+</head>
+<body>
+<div id="canvas-container"></div>
+<div id="tooltip"></div>
+
+</body>
+</html>

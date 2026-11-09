@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>付晨熙 · 前端 / AI 应用作品集</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0b10;
+    --card: rgba(255, 255, 255, 0.035);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e9eaf0;
+    --muted: #8b8fa3;
+    --accent: #5b8cff;
+    --accent2: #a06bff;
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    padding: 72px 24px 80px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* 背景光晕 */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::before {
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, #2a3d8f, transparent 70%);
+    top: -180px; left: -120px;
+  }
+  body::after {
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, #5a2a8f, transparent 70%);
+    bottom: -200px; right: -140px;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* 头部 */
+  header { margin-bottom: 64px; }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(91, 140, 255, 0.3);
+    background: rgba(91, 140, 255, 0.08);
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 22px;
+  }
+
+  h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(100deg, var(--accent), var(--accent2) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 15.5px;
+    max-width: 560px;
+  }
+
+  /* 卡片 */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 26px 24px 22px;
+    transition: transform 0.25s ease, border-color 0.25s ease,
+                background 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: "↗";
+    position: absolute;
+    top: 20px; right: 22px;
+    font-size: 15px;
+    color: var(--muted);
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(91, 140, 255, 0.45);
+    background: rgba(91, 140, 255, 0.06);
+    box-shadow: 0 18px 48px -18px rgba(91, 140, 255, 0.4);
+  }
+
+  .card:hover::after {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .card .num {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .card h2 {
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    line-height: 1.65;
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    color: #b9bccc;
+    white-space: nowrap;
+  }
+
+  .tag.hot {
+    color: #9db8ff;
+    border-color: rgba(91, 140, 255, 0.35);
+    background: rgba(91, 140, 255, 0.12);
+  }
+
+  /* 底部 */
+  footer {
+    margin-top: 64px;
+    padding-top: 26px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #6b6f82;
+  }
+
+  @media (max-width: 560px) {
+    body { padding: 44px 18px 60px; }
+    header { margin-bottom: 44px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Portfolio · 2026</span>
+    <h1>付晨熙 · <em>前端与 AI 应用</em><br />作品演示</h1>
+    <p>三个可以点开的项目：一个手写的 Three.js 三维场景，一个组件化的 Vue 单页应用，一个带 RAG 与工具调用的 AI 助手界面。全部为独立开发。</p>
+  </header>
+
+  <div class="grid">
+
+    <a class="card" href="./rainy-3d/">
+      <span class="num">01</span>
+      <h2>雨夜便利店 · 三维街角</h2>
+      <p>手写 Three.js 场景：便利店与街角建模、雨夜体积雾与湿地面反射，配合 UnrealBloom 泛光后处理。鼠标拖拽可自由环绕观察。</p>
+      <div class="tags">
+        <span class="tag hot">Three.js</span>
+        <span class="tag">WebGL</span>
+        <span class="tag">Bloom 后处理</span>
+        <span class="tag">手写 1490 行</span>
+      </div>
+    </a>
+
+    <a class="card" href="./shop-demo/">
+      <span class="num">02</span>
+      <h2>拾光集 · 电商交互</h2>
+      <p>组件化拆分的 Vue 3 单页应用：商品列表、分类筛选、商品详情、购物车抽屉与实时总价计算，状态由响应式系统统一管理。</p>
+      <div class="tags">
+        <span class="tag hot">Vue 3</span>
+        <span class="tag">Vite</span>
+        <span class="tag">组件化</span>
+        <span class="tag">响应式状态管理</span>
+      </div>
+    </a>
+
+    <a class="card" href="./ai-copilot/">
+      <span class="num">03</span>
+      <h2>AI 研究助理 · RAG 前端</h2>
+      <p>知识库上传、Agent 对话与检索检查三段式界面。可展示工具调用轨迹与检索引用来源。（演示版前端，后端服务未公开部署）</p>
+      <div class="tags">
+        <span class="tag hot">RAG</span>
+        <span class="tag">Tool-Calling</span>
+        <span class="tag">Vue 3</span>
+        <span class="tag">前后端分离</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <span>河北东方学院 · 软件工程 · 2027 届</span>
+    <span>
+      <a href="https://github.com/c06180239-lgtm" target="_blank" rel="noopener">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:3449505395@qq.com">3449505395@qq.com</a>
+    </span>
+  </footer>
+
+  <p class="note">第 3 个项目的后端为本地 Flask 服务，未公开部署，页面上传与提问按钮不会返回真实结果。</p>
+
+</div>
+</body>
+</html>
